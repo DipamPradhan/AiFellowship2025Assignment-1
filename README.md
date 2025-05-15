@@ -55,10 +55,8 @@ source env/bin/activate  # Windows: env\Scripts\activate
 pip install -r requirements.txt
 
 # Start the server
-python -m moviefinder.app
+uvicorn moviefinder.app:app  --reload
 ```
-
-Open your browser and go to [http://localhost:5000](http://localhost:5000)
 
 ---
 
