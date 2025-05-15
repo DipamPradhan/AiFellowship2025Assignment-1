@@ -1,7 +1,8 @@
-from fastapi import FastAPI, Query, HTTPException
-import httpx
 import os
+
 from dotenv import load_dotenv
+from fastapi import FastAPI, HTTPException, Query
+import httpx
 
 # Load environment variables from .env file
 load_dotenv()
@@ -30,9 +31,7 @@ Returns:
 
 @app.get("/")
 def root():
-    return {
-        "message": "Welcome to the Movie Finder API. Use /movie?title=YourTitle to search."
-    }
+    return {"message": "Welcome to the Movie Finder API. Use /movie?title=YourTitle to search."}
 
 
 """
@@ -58,7 +57,7 @@ Raises:
 @app.get("/movie")
 async def get_movie(title: str = Query(..., description="Movie title to search")):
     """
-    Parameters:- title (str): The movie title to search for. Required.
+    Parameters:- title (str): The movie title to search for. Required ###Try : Inception/Maharaja.
     """
     url = f"http://www.omdbapi.com/?t={title}&apikey={OMDB_API_KEY}"
     async with httpx.AsyncClient() as client:
@@ -66,9 +65,7 @@ async def get_movie(title: str = Query(..., description="Movie title to search")
         movie = response.json()
 
     if movie.get("Response") == "False":
-        raise HTTPException(
-            status_code=404, detail=movie.get("Error", "Movie not found")
-        )
+        raise HTTPException(status_code=404, detail=movie.get("Error", "Movie not found"))
 
     return {
         "title": movie["Title"],
