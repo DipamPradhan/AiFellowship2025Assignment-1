@@ -1,0 +1,13 @@
+version: "3.9"
+
+services:
+  moviefinder:
+    build: .
+    ports:
+      - "${APP_PORT}:${APP_PORT}"
+    env_file:
+      - .env
+    environment:
+      - omdb_api_key=${omdb_api_key}
+      - APP_HOST=${APP_HOST}
+      - APP_PORT=${APP_PORT}
