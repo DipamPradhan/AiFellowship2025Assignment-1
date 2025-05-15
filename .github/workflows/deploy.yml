@@ -2,7 +2,7 @@ name: Deploy Movie Finder
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
   deploy:
@@ -12,8 +12,8 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Set up Docker Compose
-        run: docker-compose --version
+      - name: Check Docker Compose version
+        run: docker compose version
 
       - name: Create .env file for Docker Compose
         run: |
@@ -22,4 +22,4 @@ jobs:
           echo "APP_PORT=${{ secrets.APP_PORT }}" >> .env
 
       - name: Run Docker Compose
-        run: docker-compose up -d --build
+        run: docker compose up -d --build
